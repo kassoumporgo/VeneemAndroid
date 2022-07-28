@@ -1,8 +1,13 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:veneem/models/user_model.dart';
+import 'package:veneem/ui/screens/loading_screen.dart';
+import '../../functions/api.dart';
 import '/ui/screens/about.dart';
 import '/ui/screens/comments_list.dart';
 import '/ui/screens/contact_us.dart';
@@ -10,6 +15,7 @@ import '/ui/screens/submit_comment.dart';
 import '/constants/colors.dart';
 import '/constants/icons.dart';
 import '/constants/texts.dart';
+
 
 
 class DrawerContent extends StatefulWidget {
@@ -60,17 +66,6 @@ class _DrawerContentState extends State<DrawerContent> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
 
-                  // Container(
-                  //   width: 100,
-                  //   height: 100,
-                  //   decoration: BoxDecoration(
-                  //     border: Border.all(color: Colors.red),
-                  //     shape: BoxShape.circle,
-                  //   ),
-                  // ),
-                  //
-                  // 10.height,
-
                   const Text(
                     appName,
                     style: TextStyle(
@@ -80,7 +75,6 @@ class _DrawerContentState extends State<DrawerContent> {
                   ),
                   10.height,
                   Text(
-                    // 'Version ${_packageInfo.version}',
                     'Version ${_packageInfo.version}',
                     style: const TextStyle(
                       fontWeight: FontWeight.w600,
@@ -101,14 +95,16 @@ class _DrawerContentState extends State<DrawerContent> {
 
                 DrawerItem(
                   onTap: ()=> Get.to(()=> const SubmitComment()),
-                  icon: submitCommentIcon,
-                  text: 'Soumettre une préoccupation',
+                  icon: AppIcon.submitComment,
+                  text: 'Soumettre préoccupation',
                 ),
 
                 DrawerItem(
-                  onTap: ()=> Get.to(()=> const CommentsList()),
-                  icon: viewCommentsIcon,
-                  text: 'Voir les différentes préoccupations',
+                  onTap: ()=> Get.to(()=> LoadingScreen(
+                      init: getConcerns(), text: "Chargement ..."
+                  )),
+                  icon: AppIcon.viewComments,
+                  text: 'Différentes préoccupations',
                 ),
 
                 DrawerItem(
@@ -120,32 +116,27 @@ class _DrawerContentState extends State<DrawerContent> {
                       sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size
                     );
                   },
-                  icon: shareAppIcon,
+                  icon: AppIcon.shareApp,
                   text: "Partager",
                 ),
 
                 DrawerItem(
                   onTap: () async {
-                    // if (await canLaunch(playStoreLink)) {
-                    //   await launch(url);
-                    // } else {
-                    //   throw 'Error to launch $playStoreLink';
-                    // }
+                    launch(playStoreLink);
                   },
-                  icon: playStoreIcon,
+                  icon: AppIcon.playStore,
                   text: "Noter l'application",
                 ),
 
                 DrawerItem(
-                  // onTap: () {},
                   onTap: ()=> Get.to(()=> const ContactUsScreen()),
-                  icon: contactUsIcon,
+                  icon: AppIcon.contactUs,
                   text: 'Nous contacter',
                 ),
 
                 DrawerItem(
                   onTap: ()=> Get.to(()=> AboutScreen(version: _packageInfo.version)),
-                  icon: aboutUsIcon,
+                  icon: AppIcon.aboutUs,
                   text: 'A Propos',
                 ),
 
@@ -157,6 +148,7 @@ class _DrawerContentState extends State<DrawerContent> {
       ),
     );
   }
+
 }
 
 

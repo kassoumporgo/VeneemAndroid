@@ -3,7 +3,7 @@ const dbUrl = 'https://raw.githubusercontent.com/kassoumporgo/data/d9d24febe18a7
 
 const postCommentUrl = '';
 
-const appName = 'Veneem';
+const appName = 'Yeeli';
 const logoPath = '';
 const appId = 'com.yod.veneem';
 
@@ -19,8 +19,8 @@ const appStoreLink = '';
 
 const shareSubject = "$appName, la transparence du service publice.";
 const shareContent = "Salut !\n"
-    "J'utilise $appName pour avoir des informations sur les actes de santé et de la mairie\n"
-    "Play Store : $playStoreLink\nApple AppStore : $appStoreLink";
+    "J'utilise $appName pour avoir des informations sur les actes de santé et de la mairie\n\n"
+    "$playStoreLink";
 
 
 var monthOfYear = {

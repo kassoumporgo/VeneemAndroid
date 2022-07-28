@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:veneem/constants/colors.dart';
+import '../../constants/colors.dart';
 import 'package:veneem/constants/icons.dart';
 
 
