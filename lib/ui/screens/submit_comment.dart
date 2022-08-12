@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '/functions/post_comment.dart';
+import 'package:veneem/api/services.dart';
+import 'package:veneem/ui/screens/loading_screen.dart';
+import '../../api/comment_model.dart';
 import '/functions/toasts.dart';
-import '/ui/widgets/custom_app_bar.dart';
-import '/ui/widgets/custom_text_field.dart';
-import '/ui/widgets/button.dart';
+import '/ui/components/custom_app_bar.dart';
+import '/ui/components/custom_text_field.dart';
+import '/ui/components/button.dart';
 
 
 class SubmitComment extends StatefulWidget {
@@ -151,13 +154,21 @@ class _SubmitCommentState extends State<SubmitComment> {
                       warningToast('Veuillez entrer votre préoccupation.');
                     } else {
 
-                      await postComment(
-                        name: '',
-                        phone: '',
-                        mail: '',
-                        act: act,
-                        comment: comment,
+                      CommentModel model = CommentModel(
+                        nom_et_prenoms: 'anonyme',
+                        telephone: 'telephone',
+                        email: 'email',
+                        titre: 'titre',
+                        lieu: 'lieu',
+                        commentaire: comment,
+                        actes_concernes: act == null ? [00] : [act['id']],
+                        types_preoccupations: [1,2],
                       );
+
+                      Get.to(()=> LoadingScreen(
+                        init: ApiServices.submitConcern(model),
+                        text: "Envoi en cours ..."
+                      ));
 
                     }
 
@@ -165,13 +176,32 @@ class _SubmitCommentState extends State<SubmitComment> {
 
                     if (phone.isNotEmpty && name.isNotEmpty && comment.isNotEmpty) {
 
-                      await postComment(
-                        name: name,
-                        phone: phone,
-                        mail: mail.isEmpty ? '' : mail,
-                        act: act,
-                        comment: comment,
+                      // CommentModel model = CommentModel(
+                      //   nom_et_prenoms: name,
+                      //   telephone: phone,
+                      //   email: mail.isEmpty ? '' : mail,
+                      //   titre: 'titre',
+                      //   lieu: 'lieu',
+                      //   commentaire: comment,
+                      //   actes_concernes: act == null ? [00] : [act['id']],
+                      //   types_preoccupations: [1,2],
+                      // );
+
+                      CommentModel model = CommentModel(
+                        nom_et_prenoms: name,
+                        telephone: 'telephone',
+                        email: mail.isEmpty ? '' : mail,
+                        titre: 'titre',
+                        lieu: 'lieu',
+                        commentaire: comment,
+                        actes_concernes: act == null ? [00] : [act['id']],
+                        types_preoccupations: [1,2],
                       );
+
+                      Get.to(()=> LoadingScreen(
+                          init: ApiServices.submitConcern(model),
+                          text: "Envoi en cours ..."
+                      ));
 
                     } else {
                       if(phone.isEmpty)  warningToast('Veuillez entrer votre numéro de téléphone');

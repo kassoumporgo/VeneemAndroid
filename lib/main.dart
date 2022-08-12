@@ -4,22 +4,29 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:veneem/ui/screens/intro.dart';
-import '/utils/controller.dart';
+import '/utils/session_controller.dart';
 import '/utils/root.dart';
-import '/constants/colors.dart';
+import 'utils/colors.dart';
 import '/ui/screens/home.dart';
-import 'constants/texts.dart';
+import 'utils/texts.dart';
 
 
 
-void main() async {
+Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
   await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
+  await initialize();
+
+  // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   runApp(const MyApp());
 
   final StreamSubscription<InternetConnectionStatus> listener =
@@ -48,30 +55,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final controller = Get.put(Controller());
+    // final controller = Get.put(Controller());
 
-    return SimpleBuilder(builder: (_) {
-
-      return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: appName,
-        // theme: controller.theme,
-        theme: ThemeData(
-          // primarySwatch: Colors.teal,
-          primarySwatch: AppColor.main,
-        ),
-        home: const HomeScreen(),
-        // home: controller.isFirstTime ? const IntroScreen() : const HomeScreen(),
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('fr', 'FR'),
-        ],
-      );
-
-    });
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: appName,
+      theme: ThemeData(
+        primarySwatch: AppColor.main,
+      ),
+      // home: const HomeScreen(),
+      home: const Root(),
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      locale: const Locale('FR'),
+      supportedLocales: const [
+        Locale('fr', 'FR'),
+      ],
+    );
 
   }
 }

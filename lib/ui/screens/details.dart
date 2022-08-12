@@ -1,60 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:veneem/constants/texts.dart';
+import 'package:veneem/utils/texts.dart';
 import 'package:veneem/ui/screens/submit_comment.dart';
-import 'package:veneem/ui/widgets/button.dart';
-import '/ui/widgets/custom_app_bar.dart';
+import 'package:veneem/ui/components/button.dart';
+import '/ui/components/custom_app_bar.dart';
 
 
 
 
 class DetailsScreen extends StatelessWidget {
 
-  final Map actObject;
-  final String act;
-  final String actCategory;
-  final String centers;
-  final String cost;
-  final String receipt;
-  final String validity;
-  final String finality;
-  final String legal;
-  final String delay;
-  final String dossier;
-  final String source;
-  final String lieuRetrait;
-  final String costPrecision;
-  final String minCost;
-  final String maxCost;
-  final String pageNumber;
+  final Map act;
 
   const DetailsScreen({
     Key? key,
-    required this.actObject,
     required this.act,
-    required this.actCategory,
-    required this.centers,
-    required this.cost,
-    required this.receipt,
-    required this.validity,
-    required this.finality,
-    required this.legal,
-    required this.delay,
-    required this.dossier,
-    required this.source,
-    required this.lieuRetrait,
-    required this.costPrecision,
-    required this.minCost,
-    required this.maxCost,
-    required this.pageNumber,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
-      appBar: CustomAppBar(text: act),
+      appBar: CustomAppBar(text: act['name']),
 
       body: SingleChildScrollView(
         child: Column(
@@ -63,27 +31,27 @@ class DetailsScreen extends StatelessWidget {
 
             8.height,
 
-            customColumn(label: "Catégorie d'acte", text: actCategory),
-            customColumn(label: "Acte", text: act),
-            customRow(label: centers.toString().contains(',') ? "Centres" : "Centre", text: centers.replaceAll('[', '').replaceAll(']', '')),
-            customRow(label: "COÛT", text: cost+' '+currency),
-            customColumn(label: "PRÉCISION COÛT", text: costPrecision),
-            customColumn(label: "COÛT MINIMUM", text: minCost),
-            customColumn(label: "COÛT MAXIMUM", text: maxCost),
-            customColumn(label: "QUITTANCE/REÇU/TIMBRE", text: receipt),
-            customColumn(label: "Validité", text: validity),
-            customColumn(label: "DOSSIER", text: dossier.toString()),
-            customColumn(label: "DÉLAI DE DÉLIVRANCE", text: delay),
-            customColumn(label: "LIEU DE RETRAIT", text: lieuRetrait),
-            customColumn(label: "Finalité", text: finality),
-            customColumn(label: "Base légale", text: legal),
-            customColumn(label: "SOURCE", text: source+' (Page $pageNumber)'),
+            customColumn(label: "Catégorie d'acte", text: act['categorie_acte']),
+            customColumn(label: "Acte", text: act['name']),
+            customRow(label: act['types_de_centre'].toString().contains(',') ? "Centres" : "Centre", text: act['types_de_centre'].toString().replaceAll('[', '').replaceAll(']', '')),
+            customRow(label: "COÛT", text: act['cout']+' '+currency),
+            customColumn(label: "PRÉCISION COÛT", text: act['precision_cout']),
+            customColumn(label: "COÛT MINIMUM", text: act['cout_minimum']),
+            customColumn(label: "COÛT MAXIMUM", text: act['cout_maximum']),
+            customColumn(label: "QUITTANCE/REÇU/TIMBRE", text: act['quittance_recu_timbre']),
+            customColumn(label: "Validité", text: act['validite']),
+            customColumn(label: "DOSSIER", text: act['dossier']),
+            customColumn(label: "DÉLAI DE DÉLIVRANCE", text: act['delai_de_delivrance']),
+            customColumn(label: "LIEU DE RETRAIT", text: act['lieu_de_retrait']),
+            customColumn(label: "Finalité", text: act['finalite']),
+            customColumn(label: "Base légale", text: act['base_legale']),
+            customColumn(label: "SOURCE", text: act['source_des_donnees']+' (Page ${act['page_number']})'),
 
             SizedBox(
               width: MediaQuery.of(context).size.width*.9,
               child: FilledButton(
                 text: "soumettre une préoccupation",
-                onPressed: ()=> Get.to(()=> SubmitComment(act: actObject)),
+                onPressed: ()=> Get.to(()=> SubmitComment(act: act)),
               ),
             ).center().paddingOnly(bottom: 16, top: 20),
 

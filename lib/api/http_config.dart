@@ -8,9 +8,7 @@ var token = LocalStorage.getToken();
 
 const authorization = "Bearer ";
 const _baseUrl = "https://yeeli.herokuapp.com/api/";
-
-// const contentType = "application/json; charset=UTF-8";
-const contentType = "application/json";
+const contentType = "application/json; charset=utf-8";
 
 
 class RequestResult {
@@ -34,7 +32,7 @@ Future<RequestResult> http_get(String route, [dynamic data]) async {
 
   var result = await http.get(Uri.parse(url), headers: header);
   try{
-    return RequestResult(true, jsonDecode(result.body));
+    return RequestResult(true, jsonDecode(utf8.decode(result.bodyBytes)));
   }catch(exception){
     log(result.body);
     return RequestResult(false, null);
@@ -56,7 +54,8 @@ Future<RequestResult> http_post(String route, [dynamic data]) async {
   var result = await http.post(Uri.parse(url), body: dataStr, headers: header);
   // var result = await http.post(Uri.parse(_baseUrl), body: dataStr, headers: header);
   try{
-    return RequestResult(true, jsonDecode(result.body));
+    // return RequestResult(true, jsonDecode(result.body));
+    return RequestResult(true, jsonDecode(utf8.decode(result.bodyBytes)));
   } catch(exception) {
     log(result.body);
     return RequestResult(false, null);
@@ -83,7 +82,8 @@ Future<RequestResult> http_put(String route, [dynamic data]) async {
 
   try{
     log(result.body);
-    return RequestResult(true, jsonDecode(result.body));
+    return RequestResult(true, jsonDecode(utf8.decode(result.bodyBytes)));
+    // return RequestResult(true, jsonDecode(result.body));
   }catch(exception){
     log(result.body);
     return RequestResult(false, null);
@@ -106,7 +106,8 @@ Future<RequestResult> http_delete(String route, [dynamic data]) async {
   // var result = await http.delete(Uri.parse(url), headers: header);
   var result = await http.delete(Uri.parse(_baseUrl), headers: header);
   try{
-    return RequestResult(true, jsonDecode(result.body));
+    return RequestResult(true, jsonDecode(utf8.decode(result.bodyBytes)));
+    // return RequestResult(true, jsonDecode(result.body));
   }catch(exception){
     log(result.body);
     return RequestResult(false, null);

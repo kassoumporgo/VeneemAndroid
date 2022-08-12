@@ -1,4 +1,4 @@
-package com.yod.veneem
+package com.yod.yeeli
 
 import io.flutter.embedding.android.FlutterActivity
 

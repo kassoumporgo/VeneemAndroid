@@ -1,4 +1,4 @@
-import '../utils/http_config.dart';
+import 'http_config.dart';
 
 
 
@@ -26,8 +26,14 @@ class ApiController {
 
   static Future<RequestResult> submitConcern(concern) async {
     var result = await http_post("preoccupation/", {
-      'username': concern.username,
-      'password': concern.password,
+      'nom_et_prenoms': concern.nom_et_prenoms,
+      'telephone': concern.telephone,
+      'email': concern.email,
+      'lieu': concern.lieu,
+      'titre': concern.titre,
+      'commentaire': concern.commentaire,
+      'actes_concernes': concern.actes_concernes,
+      'types_preoccupations': concern.types_preoccupations,
     });
     return result;
   }

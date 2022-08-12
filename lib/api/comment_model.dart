@@ -1,38 +1,46 @@
 
 class CommentModel {
 
-  String name;
-  String phone;
-  String mail;
-  Map? actes_concernes;
-  String comment;
-  int? id;
+  String nom_et_prenoms;
+  String telephone;
+  String email;
+  String lieu;
+  String titre;
+  String commentaire;
+  List actes_concernes;
+  List types_preoccupations;
 
   CommentModel({
-    required this.name,
-    required this.phone,
-    required this.mail,
-    this.actes_concernes,
-    required this.comment,
-    this.id,
+    required this.nom_et_prenoms,
+    required this.telephone,
+    required this.email,
+    required this.lieu,
+    required this.titre,
+    required this.commentaire,
+    required this.actes_concernes,
+    required this.types_preoccupations,
   });
 
   factory CommentModel.fromJson(Map<String, dynamic> json) => CommentModel(
-    id : json['id'],
-    name : json['name'],
-    phone : json['phone'],
-    mail : json['mail'],
+    nom_et_prenoms : json['nom_et_prenoms'],
+    telephone : json['telephone'],
+    email : json['email'],
+    lieu : json['lieu'],
+    titre : json['titre'],
+    commentaire : json['commentaire'],
     actes_concernes : json['actes_concernes'],
-    comment : json['comment'],
+    types_preoccupations : json['types_preoccupations'],
   );
 
   Map<String, dynamic> toJson() => {
-    'id' : id,
-    'name' : name,
-    'phone' : phone,
-    'mail' : mail,
+    'telephone' : telephone,
+    'nom_et_prenoms' : nom_et_prenoms,
+    'email' : email,
+    'lieu' : lieu,
+    'titre' : titre,
+    'commentaire' : commentaire,
     'actes_concernes' : actes_concernes,
-    'comment' : comment,
+    'types_preoccupations' : types_preoccupations,
   };
 
 

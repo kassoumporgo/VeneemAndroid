@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../constants/colors.dart';
-import 'package:veneem/constants/icons.dart';
+import '../../utils/colors.dart';
+import 'package:veneem/utils/icons.dart';
 
 
 

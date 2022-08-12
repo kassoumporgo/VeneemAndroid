@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:veneem/constants/colors.dart';
+import 'package:veneem/utils/colors.dart';
 import 'package:veneem/functions/toasts.dart';
 import 'package:veneem/ui/screens/submit_comment.dart';
-import 'package:veneem/ui/widgets/button.dart';
-import '/constants/texts.dart';
-import '/ui/widgets/custom_app_bar.dart';
+import 'package:veneem/ui/components/button.dart';
+import '../../utils/texts.dart';
+import '/ui/components/custom_app_bar.dart';
 import 'contact_us.dart';
 
 class AboutScreen extends StatelessWidget {

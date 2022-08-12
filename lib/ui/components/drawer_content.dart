@@ -5,16 +5,15 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:veneem/models/user_model.dart';
 import 'package:veneem/ui/screens/loading_screen.dart';
-import '../../functions/api.dart';
+import '../../api/services.dart';
 import '/ui/screens/about.dart';
 import '/ui/screens/comments_list.dart';
 import '/ui/screens/contact_us.dart';
 import '/ui/screens/submit_comment.dart';
-import '/constants/colors.dart';
-import '/constants/icons.dart';
-import '/constants/texts.dart';
+import '../../utils/colors.dart';
+import '../../utils/icons.dart';
+import '../../utils/texts.dart';
 
 
 
@@ -95,13 +94,16 @@ class _DrawerContentState extends State<DrawerContent> {
 
                 DrawerItem(
                   onTap: ()=> Get.to(()=> const SubmitComment()),
+                  // onTap: () async {
+                  //   ApiServices.getActs();
+                  // },
                   icon: AppIcon.submitComment,
                   text: 'Soumettre préoccupation',
                 ),
 
                 DrawerItem(
                   onTap: ()=> Get.to(()=> LoadingScreen(
-                      init: getConcerns(), text: "Chargement ..."
+                      init: ApiServices.getConcerns(), text: "Récupération des données en cours."
                   )),
                   icon: AppIcon.viewComments,
                   text: 'Différentes préoccupations',

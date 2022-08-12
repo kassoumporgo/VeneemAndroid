@@ -1,16 +1,8 @@
 
-const dbUrl = 'https://raw.githubusercontent.com/kassoumporgo/data/d9d24febe18a71337668666d07e875d6a6d07f4d/Data.json';
-
-const postCommentUrl = '';
-
 const appName = 'Yeeli';
-const logoPath = '';
-const appId = 'com.yod.veneem';
+const appId = 'com.yod.yeeli';
 
 const currency = 'F CFA';
-
-const appMail = '';
-const webSiteLink = 'https://www.veneem.yod.com/';
 
 const fromApp = "Depuis application mobile $appName";
 

@@ -6,7 +6,7 @@ import '/utils/themes.dart';
 final box = GetStorage();
 
 
-class Controller extends GetxController {
+class SessionController extends GetxController {
 
   bool get isDark => box.read('darkmode') ?? false;
   ThemeData get theme => isDark ? Themes().dartTheme : Themes().lightTheme;

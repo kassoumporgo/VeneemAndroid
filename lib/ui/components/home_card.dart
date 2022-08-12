@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:veneem/constants/colors.dart';
+import 'package:veneem/utils/colors.dart';
 import '/ui/screens/category.dart';
 
 
